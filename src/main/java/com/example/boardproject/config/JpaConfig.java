@@ -13,6 +13,6 @@ public class JpaConfig {
 
     @Bean
     public AuditorAware<String> auditorAware() {
-        return () -> Optional.of("honey"); // TODO : 스프링 시큐리티로 인증 기능 붙일 때 수정하기
+        return () -> Optional.of("honey"); // TODO : 스프링 시큐리티로 인증 기능 붙일 때 수정하기 "honey"는 임의로 넣어둔 데이터 createdBy에 들어갈 데이터
     }
 }
