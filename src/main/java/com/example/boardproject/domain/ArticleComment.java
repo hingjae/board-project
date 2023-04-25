@@ -20,9 +20,8 @@ import java.util.Objects;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 }) // 검색을 위해 인덱스 작업을 해줌. 댓글은 본문(content) 용량이 적어서 인덱스를 걸어줌.
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class ArticleComment {
+public class ArticleComment extends AuditingFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +32,6 @@ public class ArticleComment {
     private Article article; // optional = false -> 필수값 article과 필수적으로 관계를 맺음. cascade == none
     @Setter @Column(nullable = false, length = 500)
     private String content;
-
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @CreatedBy
-    @Column(nullable = false, length = 100)
-    private String createdBy;
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;
-    @LastModifiedBy
-    @Column(nullable = false, length = 100)
-    private String modifiedBy;
 
     protected ArticleComment() {
     }

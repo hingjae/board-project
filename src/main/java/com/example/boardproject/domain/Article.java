@@ -22,9 +22,8 @@ import java.util.*;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 }) // 검색을 위해 인덱스 작업을 해줌. 본문검색은 용량이 너무 커서 지원하지 않음.
-@EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Article {
+public class Article extends AuditingFields{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //mysql id 생성전략 == identity
@@ -45,19 +44,6 @@ public class Article {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL) // mappedby안해주면 article_comment를 합쳐서 새로운 테이블을 만듦. 영속성전파
     @ToString.Exclude //무한루프 방지
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
-
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @CreatedBy
-    @Column(nullable = false, length = 100)
-    private String createdBy;
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;
-    @LastModifiedBy
-    @Column(nullable = false, length = 100)
-    private String modifiedBy;
 
     //jpa는 기본생성자 필수
     protected Article() {
