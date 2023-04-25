@@ -8,18 +8,20 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
 @Getter
 @ToString
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
-}) // 검색을 위해 인덱스 작업을 해줌.
+}) // 검색을 위해 인덱스 작업을 해줌. 댓글은 본문(content) 용량이 적어서 인덱스를 걸어줌.
+@EntityListeners(AuditingEntityListener.class)
+@Entity
 public class ArticleComment {
 
     @Id
@@ -28,7 +30,7 @@ public class ArticleComment {
 
     @Setter
     @ManyToOne(optional = false)
-    private Article article; // optional = false -> 필수값,  cascade == none
+    private Article article; // optional = false -> 필수값 article과 필수적으로 관계를 맺음. cascade == none
     @Setter @Column(nullable = false, length = 500)
     private String content;
 
