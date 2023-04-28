@@ -38,6 +38,8 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 // gradle clean 시에 QClass 디렉토리 삭제
