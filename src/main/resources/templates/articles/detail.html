@@ -1,56 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>게시글 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시글 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
 
 <header id="header"></header>
 
-<main>
-  <header>
-    <h1>첫번째 </h1>
-  </header>
+<main class="container">
+    <header class="py-5 text-center">
+        <h1>첫번째 </h1>
+    </header>
 
-  <aside>
-    <p><span class="nick-name">Honey</span></p>
-    <p><a href="honey@naver.com">honey@naver.com</a></p>
-    <p><time datetime="2022-01-01T00:00:00">2022-04-28</time></p>
-    <p>#java</p>
-  </aside>
+    <div class="row g-5">
+        <section class="col-md-5 col-lg-4 order-md-last">
+            <aside>
+                <p><span class="nick-name">Honey</span></p>
+                <p><a class="u-url" rel="me" href="honey@naver.com">honey@naver.com</a></p>
+                <p>
+                    <time datetime="2022-01-01T00:00:00">2022-04-28</time>
+                </p>
+                <p>#java</p>
+            </aside>
+        </section>
+        <article class="col-md-7 col-lg-8">
+            <p class="lead">hello world</p>
+        </article>
+    </div>
 
-  <section>
-    <p>본문<br></p>
+    <div class="row g-5">
+        <section>
+            <form class="row g-3">
+                <div class="col-8">
+                    <label for="comment-textbox" hidden></label>
+                    <textarea class="form-control" id="comment-textbox" placeholder="..." rows="3"></textarea>
+                </div>
+                <div class="col-auto">
+                    <label for="comment-submit" hidden></label>
+                    <button class="btn btn-primary" type="submit" id="comment-submit">submit</button>
+                </div>
+            </form>
 
-    <div>
-      <form>
-        <label for="articleComment"></label>
-        <textarea id="articleComment" placeholder="..." rows="3"></textarea>
-        <button type="submit">submit</button>
-      </form>
-
-      <ul>
-        <li>
-          <div>
-            <time><small>2022-01-01</small></time>
-            <strong>작성자 닉네임</strong>
-            <p>
-              멋저요! 멋저요! 멋저요! 멋저요!
-            </p>
-          </div>
-        </li>
-      </ul>
+            <ul>
+                <li>
+                    <div>
+                        <time><small>2022-01-01</small></time>
+                        <strong>작성자 닉네임</strong>
+                        <p>
+                            멋저요! 멋저요! 멋저요! 멋저요!
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <div>
+                        <time><small>2022-01-01</small></time>
+                        <strong>작성자 닉네임</strong>
+                        <p>
+                            멋저요! 멋저요! 멋저요! 멋저요!
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; prev</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">next &raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
     </div>
-    <nav>
-      <a href="#">이전글</a>
-      <a href="#">다음글</a>
-    </nav>
-  </section>
+
+
 </main>
 
 <footer id="footer"></footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
 </html>
