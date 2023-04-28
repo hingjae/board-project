@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시판 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="/css/search-bar.css" rel="stylesheet">
+</head>
+<body>
+
+<header id="header"></header>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 card-margin">
+                <div class="card search-form">
+                    <div class="card-body p-0">
+                        <form id="search-form">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                                <option>Location</option>
+                                                <option>London</option>
+                                                <option>Boston</option>
+                                                <option>Mumbai</option>
+                                                <option>New York</option>
+                                                <option>Toronto</option>
+                                                <option>Paris</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                                            <input type="text" placeholder="Search..." class="form-control" id="search"
+                                                   name="search">
+                                        </div>
+                                        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+                                            <button type="submit" class="btn btn-base">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                     class="feather feather-search">
+                                                    <circle cx="11" cy="11" r="8"></circle>
+                                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-6">제목</th>
+                <th class="col-2">해시태그</th>
+                <th class="col">작성자</th>
+                <th class="col">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>첫글</td>
+                <td>#java</td>
+                <td>honey</td>
+                <td>2022-01-01</td>
+            </tr>
+            <tr>
+                <td>두번째글</td>
+                <td>#java</td>
+                <td>honey</td>
+                <td>2022-01-02</td>
+            </tr>
+            <tr>
+                <td>세번글</td>
+                <td>#java</td>
+                <td>honey</td>
+                <td>2022-01-03</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    <footer id="footer"></footer>
+</main>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+</html>
