@@ -9,7 +9,7 @@ import java.util.*;
 
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
@@ -20,39 +20,32 @@ import java.util.*;
 public class Article extends AuditingFields{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //mysql id 생성전략 == identity
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
-    @Column(nullable = false)
-    private String title;
-    @Setter
-    @Column(nullable = false, length = 10000)
-    private String content;
+    @ManyToOne(optional = false) private UserAccount userAccount;
 
-    @Setter
-    private String hashtag;
+    @Setter @Column(nullable = false) private String title;
+    @Setter @Column(nullable = false, length = 10000) private String content;
+    @Setter private String hashtag;
 
-    //cascade => article이 사라지면 연관관계의 댓글도 사라짐.
-    @OrderBy("id")  // 정렬기준 id
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL) // mappedby안해주면 article_comment를 합쳐서 새로운 테이블을 만듦. 영속성전파
-    @ToString.Exclude //무한루프 방지
+    @ToString.Exclude
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-    //jpa는 기본생성자 필수
     protected Article() {
     }
 
-    // 식별자는 이미 auto로 되어있음 , 메타데이터는 생성자에 포함하지 않음.
-    private Article(String title, String content, String hashtag) {
+    private Article(UserAccount userAccount, String title, String content, String hashtag) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
     }
 
-    //팩토리 메서드
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title, content, hashtag); //생성자 메서드 사용
+    public static Article of(UserAccount userAccount, String title, String content, String hashtag) {
+        return new Article(userAccount, title, content, hashtag); //생성자 메서드 사용
     }
 
     @Override
