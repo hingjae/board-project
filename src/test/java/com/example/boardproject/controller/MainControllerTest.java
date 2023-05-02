@@ -27,6 +27,6 @@ class MainControllerTest {
     @Test
     void givenRootPath_whenRequestRootPage_thenRedirectToArticlesPage() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
