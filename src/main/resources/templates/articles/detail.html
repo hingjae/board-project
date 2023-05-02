@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,26 +9,29 @@
 </head>
 <body>
 
-<header id="header"></header>
+<header id="header">
+    헤더 삽입
+</header>
 
-<main class="container">
-    <header class="py-5 text-center">
-        <h1>첫번째 </h1>
+<main id="article-main" class="container">
+    <header id="article-header" class="py-5 text-center">
+        <h1>첫번째 글</h1>
     </header>
 
     <div class="row g-5">
         <section class="col-md-5 col-lg-4 order-md-last">
             <aside>
-                <p><span class="nick-name">Honey</span></p>
-                <p><a class="u-url" rel="me" href="honey@naver.com">honey@naver.com</a></p>
+                <p><span id="nickname">Honey</span></p>
+                <p><a id="email" href="honey@naver.com">honey@naver.com</a></p>
                 <p>
-                    <time datetime="2022-01-01T00:00:00">2022-04-28</time>
+                    <time id="created-at" datetime="2022-01-01T00:00:00">2022-04-28</time>
                 </p>
-                <p>#java</p>
+                <p><span id="hashtag">#java</span></p>
             </aside>
         </section>
-        <article class="col-md-7 col-lg-8">
-            <p class="lead">hello world</p>
+
+        <article id="article-content" class="col-md-7 col-lg-8">
+            <pre>본문<br><br></pre>
         </article>
     </div>
 
@@ -45,28 +48,31 @@
                 </div>
             </form>
 
-            <ul>
+            <ul id="article-comments" class="row col-7">
                 <li>
                     <div>
-                        <time><small>2022-01-01</small></time>
                         <strong>작성자 닉네임</strong>
+                        <small>
+                            <time>2022-01-01</time>
+                        </small>
+                        <p>
+                            멋저요! 멋저요! 멋저요! 멋저요!
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>작성자 닉네임</strong>
+                        <small>
+                            <time>2022-01-01</time>
+                        </small>
                         <p>
                             멋저요! 멋저요! 멋저요! 멋저요!
                         </p>
                     </div>
                 </li>
             </ul>
-            <ul>
-                <li>
-                    <div>
-                        <time><small>2022-01-01</small></time>
-                        <strong>작성자 닉네임</strong>
-                        <p>
-                            멋저요! 멋저요! 멋저요! 멋저요!
-                        </p>
-                    </div>
-                </li>
-            </ul>
+
         </section>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
