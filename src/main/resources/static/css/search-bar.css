@@ -3,6 +3,10 @@ body {
     /*margin-top: 20px;*/
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .widget-26 {
     color: #3c4142;
     font-weight: 400;
