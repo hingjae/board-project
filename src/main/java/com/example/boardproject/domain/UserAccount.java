@@ -1,7 +1,9 @@
 package com.example.boardproject.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class UserAccount extends AuditingFields{
 
@@ -9,7 +11,7 @@ public class UserAccount extends AuditingFields{
     private Long id;
     @Column(unique = true)
     private String userId;
-    private String password;
+    private String userPassword;
     private String email;
     private String nickname;
     private String memo;
@@ -22,7 +24,7 @@ public class UserAccount extends AuditingFields{
 
     public UserAccount(String userId, String password, String email, String nickname, String memo) {
         this.userId = userId;
-        this.password = password;
+        this.userPassword = password;
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
