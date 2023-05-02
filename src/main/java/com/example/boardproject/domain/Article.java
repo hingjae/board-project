@@ -23,16 +23,16 @@ public class Article extends AuditingFields{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ToString.Exclude
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+
     @ManyToOne(optional = false) private UserAccount userAccount;
 
     @Setter @Column(nullable = false) private String title;
     @Setter @Column(nullable = false, length = 10000) private String content;
     @Setter private String hashtag;
-
-    @ToString.Exclude
-    @OrderBy("createdAt DESC")
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
     protected Article() {
     }
@@ -45,7 +45,7 @@ public class Article extends AuditingFields{
     }
 
     public static Article of(UserAccount userAccount, String title, String content, String hashtag) {
-        return new Article(userAccount, title, content, hashtag); //생성자 메서드 사용
+        return new Article(userAccount, title, content, hashtag);
     }
 
     @Override
