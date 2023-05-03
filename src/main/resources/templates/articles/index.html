@@ -22,24 +22,22 @@
             <div class="col-lg-12 card-margin">
                 <div class="card search-form">
                     <div class="card-body p-0">
-                        <form id="search-form">
+                        <form action="/articles" method="get">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>Location</option>
-                                                <option>London</option>
-                                                <option>Boston</option>
-                                                <option>Mumbai</option>
-                                                <option>New York</option>
-                                                <option>Toronto</option>
-                                                <option>Paris</option>
+                                            <select class="form-control" id="search-type" name="searchType">
+                                                <option>제목</option>
+                                                <option>내용</option>
+                                                <option>id</option>
+                                                <option>닉네임</option>
+                                                <option>해시태그</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                            <input type="text" placeholder="Search..." class="form-control" id="search"
-                                                   name="search">
+                                            <input type="text" placeholder="Search..." class="form-control" id="search-value"
+                                                   name="searchValue">
                                         </div>
                                         <div class="col-lg-1 col-md-3 col-sm-12 p-0">
                                             <button type="submit" class="btn btn-base">
