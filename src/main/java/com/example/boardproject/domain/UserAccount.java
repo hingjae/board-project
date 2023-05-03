@@ -4,16 +4,22 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
+@Table(indexes = {
+        @Index(columnList = "userId", unique = true),
+        @Index(columnList = "email", unique = true),
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy")
+})
 @Entity
 public class UserAccount extends AuditingFields{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
-    private String userId;
-    private String userPassword;
-    private String email;
-    private String nickname;
+
+    @Column(unique = true, nullable = false, length = 50) private String userId;
+    @Column(nullable = false) private String userPassword;
+    @Column(length = 100) private String email;
+    @Column(length = 100) private String nickname;
     private String memo;
 
     protected UserAccount() {}
