@@ -3,9 +3,10 @@ package com.example.boardproject.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 @Table(indexes = {
-        @Index(columnList = "userId", unique = true),
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
@@ -13,10 +14,9 @@ import lombok.Getter;
 @Entity
 public class UserAccount extends AuditingFields{
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @Column(length = 50) private String userId;
 
-    @Column(unique = true, nullable = false, length = 50) private String userId;
     @Column(nullable = false) private String userPassword;
     @Column(length = 100) private String email;
     @Column(length = 100) private String nickname;
@@ -34,5 +34,18 @@ public class UserAccount extends AuditingFields{
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(getUserId(), that.getUserId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserId());
     }
 }

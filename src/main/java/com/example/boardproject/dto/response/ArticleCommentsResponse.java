@@ -11,7 +11,7 @@ public record ArticleCommentsResponse(
         LocalDateTime createdAt,
         String email,
         String nickname
-) implements Serializable {
+){
 
     public static ArticleCommentsResponse of(Long id, String content, LocalDateTime createdAt, String email, String nickname) {
         return new ArticleCommentsResponse(id, content, createdAt, email, nickname);

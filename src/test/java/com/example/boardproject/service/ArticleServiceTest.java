@@ -2,13 +2,13 @@ package com.example.boardproject.service;
 
 import com.example.boardproject.domain.Article;
 import com.example.boardproject.domain.UserAccount;
-import com.example.boardproject.domain.type.SearchType;
+import com.example.boardproject.domain.constant.SearchType;
 import com.example.boardproject.dto.ArticleDto;
 import com.example.boardproject.dto.ArticleWithCommentsDto;
 import com.example.boardproject.dto.UserAccountDto;
 import com.example.boardproject.repository.ArticleRepository;
+import com.example.boardproject.repository.UserAccountRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +32,8 @@ class ArticleServiceTest {
     private ArticleService sut; // 테스트 대상
     @Mock
     private ArticleRepository articleRepository; // repository -> service로 주입
-
+    @Mock
+    private UserAccountRepository userAccountRepository;
 
     @DisplayName("게시글 없이 검색하는 경우")
     @Test
@@ -72,7 +73,7 @@ class ArticleServiceTest {
         articleRepository.save(article);
         given(articleRepository.findById(articleId)).willReturn(Optional.of(article));
 
-        ArticleWithCommentsDto dto = sut.getArticle(articleId);
+        ArticleWithCommentsDto dto = sut.getArticleWithComments(articleId);
         assertThat(dto)
                 .hasFieldOrPropertyWithValue("title", article.getTitle())
                 .hasFieldOrPropertyWithValue("content", article.getContent())
@@ -153,7 +154,7 @@ class ArticleServiceTest {
         Article article = createArticle();
         ArticleDto dto = createArticleDto("새 타이틀", "새 내용");
         given(articleRepository.getReferenceById(dto.id())).willReturn(article);
-        sut.updateArticle(dto);
+        sut.updateArticle(dto.id(), dto);
         then(articleRepository).should().getReferenceById(dto.id());
 
     }
@@ -165,7 +166,7 @@ class ArticleServiceTest {
         given(articleRepository.getReferenceById(dto.id())).willThrow(EntityNotFoundException.class);
 
         //when
-        sut.updateArticle(dto);
+        sut.updateArticle(dto.id(), dto);
 
         then(articleRepository).should().getReferenceById(dto.id());
     }
@@ -176,21 +177,15 @@ class ArticleServiceTest {
 
     private ArticleDto createArticleDto(String title, String content) {
         return ArticleDto.of(
-                1L,
                 createUserAccountDto(),
                 title,
                 content,
-                "hashtag",
-                LocalDateTime.now(),
-                "honey",
-                LocalDateTime.now(),
-                "honey"
+                "hashtag"
         );
     }
 
     private UserAccountDto createUserAccountDto() {
         return UserAccountDto.of(
-                1L,
                 "honey",
                 "password",
                 "honey@email.com",

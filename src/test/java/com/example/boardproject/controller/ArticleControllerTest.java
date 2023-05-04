@@ -1,7 +1,7 @@
 package com.example.boardproject.controller;
 
 import com.example.boardproject.config.SecurityConfig;
-import com.example.boardproject.domain.type.SearchType;
+import com.example.boardproject.domain.constant.SearchType;
 import com.example.boardproject.dto.ArticleWithCommentsDto;
 import com.example.boardproject.dto.UserAccountDto;
 import com.example.boardproject.service.ArticleService;
@@ -9,7 +9,6 @@ import com.example.boardproject.service.PaginationService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -117,14 +116,14 @@ class ArticleControllerTest {
     void givenNothing_whenArticleView_thenReturArticlesView() throws Exception {
 
         Long articleId = 1L;
-        given(articleService.getArticle(articleId)).willReturn(createArticleWithCommentsDto());
+        given(articleService.getArticleWithComments(articleId)).willReturn(createArticleWithCommentsDto());
         mvc.perform(get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
                 .andExpect(view().name("articles/detail"))
                 .andExpect(model().attributeExists("article"))
                 .andExpect(model().attributeExists("articleComments"));
-        then(articleService).should().getArticle(articleId);
+        then(articleService).should().getArticleWithComments(articleId);
     }
 
     @Disabled("구현 중")
@@ -185,7 +184,6 @@ class ArticleControllerTest {
 
     private UserAccountDto createUserAccountDto() {
         return UserAccountDto.of(
-                1L,
                 "honey",
                 "pw",
                 "honey@email.com",

@@ -22,7 +22,7 @@ public class ArticleComment extends AuditingFields{
 
     // optional = false -> 필수값 article과 필수적으로 관계를 맺음. cascade == none
     @Setter @ManyToOne(optional = false) private Article article;
-    @ManyToOne(optional = false) private UserAccount userAccount;
+    @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
 
     @Setter @Column(nullable = false, length = 500) private String content;
 
