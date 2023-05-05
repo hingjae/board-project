@@ -6,6 +6,7 @@ import com.example.boardproject.dto.UserAccountDto;
 import com.example.boardproject.dto.request.ArticleRequest;
 import com.example.boardproject.dto.response.ArticleResponse;
 import com.example.boardproject.dto.response.ArticleWithCommentsResponse;
+import com.example.boardproject.repository.ArticleCommentRepository;
 import com.example.boardproject.service.ArticleService;
 import com.example.boardproject.service.PaginationService;
 import lombok.RequiredArgsConstructor;
@@ -73,7 +74,6 @@ public class ArticleController {
     @GetMapping("/form")
     public String articleForm(ModelMap map) {
         map.addAttribute("formStatus", FormStatus.CREATE);
-
         return "articles/form";
     }
 
@@ -81,7 +81,7 @@ public class ArticleController {
     public String postNewArticle(ArticleRequest articleRequest) {
         // TODO: 인증 정보를 넣어줘야 한다.
         articleService.saveArticle(articleRequest.toDto(UserAccountDto.of(
-                "uno", "asdf1234", "uno@mail.com", "Uno", "memo"
+                "honey1", "asdf1234", "uno@mail.com", "Uno", "memo"
         )));
 
         return "redirect:/articles";
@@ -101,7 +101,7 @@ public class ArticleController {
     public String updateArticle(@PathVariable Long articleId, ArticleRequest articleRequest) {
         // TODO: 인증 정보를 넣어줘야 한다.
         articleService.updateArticle(articleId, articleRequest.toDto(UserAccountDto.of(
-                "uno", "asdf1234", "uno@mail.com", "Uno", "memo"
+                "honey1", "asdf1234", "uno@mail.com", "Uno", "memo"
         )));
 
         return "redirect:/articles/" + articleId;
