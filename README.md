@@ -20,3 +20,6 @@
 - DB, 접근기술 : spring data jpa, h2, mysql
 - 웹 프론트 (디자인) : thymeleaf (bootstrap)
 - 인증 기능 : spring security
+
+## 데모 페이지
+- https://honey-board.herokuapp.com/
