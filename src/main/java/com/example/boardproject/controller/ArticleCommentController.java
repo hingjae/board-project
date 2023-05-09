@@ -1,9 +1,7 @@
 package com.example.boardproject.controller;
 
-import com.example.boardproject.dto.UserAccountDto;
 import com.example.boardproject.dto.request.ArticleCommentRequest;
 import com.example.boardproject.dto.security.BoardPrincipal;
-import com.example.boardproject.repository.ArticleCommentRepository;
 import com.example.boardproject.service.ArticleCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
