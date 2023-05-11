@@ -3,9 +3,7 @@ package com.example.boardproject.dto.response;
 import com.example.boardproject.dto.ArticleCommentDto;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public record ArticleCommentResponse(
         Long id,
@@ -32,7 +30,8 @@ public record ArticleCommentResponse(
                 .comparing(ArticleCommentResponse::createdAt)
                 .thenComparingLong(ArticleCommentResponse::id);
         return new ArticleCommentResponse(
-                id, content, createdAt, email, nickname, userId, parentCommentId, new TreeSet<>(childCommentComparator));
+                id, content, createdAt, email, nickname, userId, parentCommentId, new LinkedHashSet<>(new TreeSet<>(childCommentComparator))
+        );
 
     }
 

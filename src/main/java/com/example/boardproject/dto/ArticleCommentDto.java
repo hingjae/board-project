@@ -19,7 +19,7 @@ public record ArticleCommentDto(
 ) {
 
     public static ArticleCommentDto of(Long articleId, UserAccountDto userAccountDto, String content) {
-        return ArticleCommentDto.of(null, articleId, userAccountDto, null, content, null, null, null, null);
+        return ArticleCommentDto.of(articleId, userAccountDto, null, content);
     }
 
     public static ArticleCommentDto of(

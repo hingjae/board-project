@@ -26,8 +26,11 @@ public class ArticleCommentService {
     private final UserAccountRepository userAccountRepository;
 
     @Transactional(readOnly = true)
-    public List<ArticleCommentDto> searchArticleComment(Long articleId) {
-        return List.of();
+    public List<ArticleCommentDto> searchArticleComments(Long articleId) {
+        return articleCommentRepository.findByArticle_Id(articleId)
+                .stream()
+                .map(ArticleCommentDto::from)
+                .toList();
     }
 
     public void saveArticleComment(ArticleCommentDto dto) {
