@@ -3,7 +3,6 @@ package com.example.boardproject.dto;
 import com.example.boardproject.domain.Article;
 import com.example.boardproject.domain.UserAccount;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;

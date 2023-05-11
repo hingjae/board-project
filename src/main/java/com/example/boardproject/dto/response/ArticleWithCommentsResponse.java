@@ -4,7 +4,6 @@ import com.example.boardproject.dto.ArticleCommentDto;
 import com.example.boardproject.dto.ArticleWithCommentsDto;
 import com.example.boardproject.dto.HashtagDto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;

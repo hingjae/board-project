@@ -3,7 +3,6 @@ package com.example.boardproject.dto.response;
 import com.example.boardproject.dto.ArticleDto;
 import com.example.boardproject.dto.HashtagDto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
