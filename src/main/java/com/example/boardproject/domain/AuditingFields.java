@@ -18,24 +18,24 @@ import java.time.LocalDateTime;
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class AuditingFields {
+public abstract class AuditingFields {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) // 웹 화면으로 보여질 때 파싱이 되는 방법
     @CreatedDate
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
 
     @CreatedBy
     @Column(nullable = false, length = 100, updatable = false)
-    private String createdBy;
+    protected String createdBy;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) // 웹 화면으로 보여질 때 파싱이 되는 방법
     @LastModifiedDate
     @Column(nullable = false)
-    private LocalDateTime modifiedAt;
+    protected LocalDateTime modifiedAt;
 
     @LastModifiedBy
     @Column(nullable = false, length = 100)
-    private String modifiedBy;
+    protected String modifiedBy;
 
 }
