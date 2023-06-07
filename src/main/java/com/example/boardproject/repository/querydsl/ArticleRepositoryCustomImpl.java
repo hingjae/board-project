@@ -12,7 +12,9 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.util.Collection;
 import java.util.List;
 
-public class ArticleRepositoryCustomImpl extends QuerydslRepositorySupport implements ArticleRepositoryCustom {
+public class ArticleRepositoryCustomImpl
+        extends QuerydslRepositorySupport
+        implements ArticleRepositoryCustom {
 
     public ArticleRepositoryCustomImpl() {
         super(Article.class);
@@ -37,7 +39,7 @@ public class ArticleRepositoryCustomImpl extends QuerydslRepositorySupport imple
                 .innerJoin(article.hashtags, hashtag)
                 .where(hashtag.hashtagName.in(hashtagNames));
 
-        List<Article> articles = getQuerydsl().applyPagination(pageable, query).fetch(); // ?
+        List<Article> articles = getQuerydsl().applyPagination(pageable, query).fetch();
 
         return new PageImpl<>(articles, pageable, query.fetchCount());
     }

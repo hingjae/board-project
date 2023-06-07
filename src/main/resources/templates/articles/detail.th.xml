@@ -15,7 +15,7 @@
             />
         </attr>
 
-        <attr sel="#article-content/p" th:text="*{content}" />
+        <attr sel="#article-content/pre" th:text="*{content}" />
 
         <attr sel="#article-buttons" th:if="${#authorization.expression('isAuthenticated()')} and *{userId} == ${#authentication.name}">
             <attr sel="#delete-article-form" th:action="'/articles/' + *{id} + '/delete'" th:method="post">

@@ -12,8 +12,8 @@ public class DataRestConfig {
     // 회원 계정에 한해서 `userId`가 노출되게끔 해줘야 함
     @Bean
     public RepositoryRestConfigurer repositoryRestConfigurer() {
-        return RepositoryRestConfigurer.withConfig((config, cors) ->
-                config.exposeIdsFor(UserAccount.class)
+        return RepositoryRestConfigurer.withConfig(
+                (config, cors) -> config.exposeIdsFor(UserAccount.class)
         );
     }
 

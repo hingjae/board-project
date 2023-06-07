@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.Collection;
 import java.util.List;
 
-//DB에서 도메인 전체를 가져오는 게 아닌 부분적으로 가져오기 때문에 querydsl사용
 public interface ArticleRepositoryCustom {
 
     /**
@@ -15,5 +14,6 @@ public interface ArticleRepositoryCustom {
      */
     @Deprecated
     List<String> findAllDistinctHashtags();
+
     Page<Article> findByHashtagNames(Collection<String> hashtagNames, Pageable pageable);
 }

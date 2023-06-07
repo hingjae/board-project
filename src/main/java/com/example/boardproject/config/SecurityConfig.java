@@ -24,7 +24,7 @@ import static org.springframework.security.config.Customizer.*;
 @Configuration
 public class SecurityConfig {
 
-    @Bean //최슨 스프링부트 버전이 업그레이드 되며 methodchainig 방식 -> 람다식으로 바뀌는 추세이다.
+    @Bean
     public SecurityFilterChain filterChain(
             HttpSecurity http,
             OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService
@@ -37,8 +37,8 @@ public class SecurityConfig {
                                 "/",
                                 "/articles",
                                 "/articles/search-hashtag"
-                        ).permitAll() // 모두허가
-                        .anyRequest().authenticated() // 나머지는 인증 필요
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults())
                 .logout(logout-> logout.logoutSuccessUrl("/"))
@@ -61,7 +61,7 @@ public class SecurityConfig {
             OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
             KakaoOAuth2Response kakaoResponse = KakaoOAuth2Response.from(oAuth2User.getAttributes());
-            String registrationId = userRequest.getClientRegistration().getRegistrationId();
+            String registrationId = userRequest.getClientRegistration().getRegistrationId(); // == kakao
             String providerId = String.valueOf(kakaoResponse.id());
             String username = registrationId + "_" + providerId;
             String dummyPassword = passwordEncoder.encode("{bcrypt}" + UUID.randomUUID());

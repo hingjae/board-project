@@ -1,6 +1,7 @@
 package com.example.boardproject.config;
 
 import com.example.boardproject.dto.security.BoardPrincipal;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -11,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 
-@EnableJpaAuditing //?
+@EnableJpaAuditing
 @Configuration
 public class JpaConfig {
 

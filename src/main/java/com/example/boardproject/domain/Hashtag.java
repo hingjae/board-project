@@ -1,5 +1,6 @@
 package com.example.boardproject.domain;
 
+import com.example.boardproject.domain.baseentity.AuditingFields;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,12 +11,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@ToString(callSuper = true) // auditing field까지 출력
-@Table(indexes = {
-        @Index(columnList = "hashtagName", unique = true),
-        @Index(columnList = "createdAt"),
-        @Index(columnList = "createdBy")
-})
+@ToString(callSuper = true)
+@Table(
+        indexes = {
+                @Index(columnList = "hashtagName", unique = true),
+                @Index(columnList = "createdAt"),
+                @Index(columnList = "createdBy")
+        }
+)
 @Entity
 public class Hashtag extends AuditingFields {
 
@@ -25,9 +28,9 @@ public class Hashtag extends AuditingFields {
 
     @ToString.Exclude
     @ManyToMany(mappedBy = "hashtags")
-    private Set<Article> articles = new LinkedHashSet<>(); // 순서를 고려하기 위해 LinkedHashSet사용
+    private Set<Article> articles = new LinkedHashSet<>();
 
-    @Setter @Column(nullable = false) private String hashtagName;
+    @Setter @Column(nullable = false) private String hashtagName;;
 
     protected Hashtag() {}
 
@@ -42,9 +45,8 @@ public class Hashtag extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Hashtag hashtag = (Hashtag) o;
-        return this.getId() != null && this.getId().equals(hashtag.getId());
+        if (!(o instanceof Hashtag hashtag)) return false;
+        return getId() != null && getId().equals(hashtag.getId());
     }
 
     @Override

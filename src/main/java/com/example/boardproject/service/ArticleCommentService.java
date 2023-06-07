@@ -28,8 +28,7 @@ public class ArticleCommentService {
     @Transactional(readOnly = true)
     public List<ArticleCommentDto> searchArticleComments(Long articleId) {
         return articleCommentRepository.findByArticle_Id(articleId)
-                .stream()
-                .map(ArticleCommentDto::from)
+                .stream().map(ArticleCommentDto::from)
                 .toList();
     }
 
@@ -50,6 +49,7 @@ public class ArticleCommentService {
         }
     }
 
+    @Deprecated
     public void updateArticleComment(ArticleCommentDto dto) {
         try {
             ArticleComment articleComment = articleCommentRepository.getReferenceById(dto.id());
@@ -62,5 +62,4 @@ public class ArticleCommentService {
     public void deleteArticleComment(Long articleCommentId, String userId) {
         articleCommentRepository.deleteByIdAndUserAccount_UserId(articleCommentId, userId);
     }
-
 }

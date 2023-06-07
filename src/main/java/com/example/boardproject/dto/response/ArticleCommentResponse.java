@@ -4,6 +4,7 @@ import com.example.boardproject.dto.ArticleCommentDto;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public record ArticleCommentResponse(
         Long id,
@@ -16,23 +17,17 @@ public record ArticleCommentResponse(
         Set<ArticleCommentResponse> childComments
 ){
 
-    public static ArticleCommentResponse of(
-            Long id, String content, LocalDateTime createdAt, String email, String nickname, String userId
-    ) {
+    public static ArticleCommentResponse of(Long id, String content, LocalDateTime createdAt, String email, String nickname, String userId) {
         return ArticleCommentResponse.of(id, content, createdAt, email, nickname, userId, null);
     }
 
-    public static ArticleCommentResponse of(
-            Long id, String content, LocalDateTime createdAt, String email, String nickname, String userId,
-            Long parentCommentId
-    ) {
-        Comparator<ArticleCommentResponse> childCommentComparator = Comparator
-                .comparing(ArticleCommentResponse::createdAt)
-                .thenComparingLong(ArticleCommentResponse::id);
+    public static ArticleCommentResponse of(Long id, String content, LocalDateTime createdAt, String email, String nickname, String userId, Long parentCommentId) {
         return new ArticleCommentResponse(
-                id, content, createdAt, email, nickname, userId, parentCommentId, new LinkedHashSet<>(new TreeSet<>(childCommentComparator))
+                id, content, createdAt, email, nickname, userId, parentCommentId, new LinkedHashSet<>()
         );
-
+        //new HashSet<>(new TreeSet<>(childCommentComparator))
+        //new LinkedHashSet<>(new TreeSet<>(childCommentComparator))
+        //new TreeSet<>(childCommentComparator)
     }
 
     public static ArticleCommentResponse from(ArticleCommentDto dto) {

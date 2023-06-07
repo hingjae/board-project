@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
 
 public record ArticleWithCommentsResponse(
         Long id,
@@ -21,13 +24,8 @@ public record ArticleWithCommentsResponse(
         Set<ArticleCommentResponse> articleCommentsResponse
 )  {
 
-    public static ArticleWithCommentsResponse of(
-            Long id, String title, String content, Set<String> hashtags, LocalDateTime createdAt, String email,
-            String nickname, String userId, Set<ArticleCommentResponse> articleCommentResponse
-    ) {
-        return new ArticleWithCommentsResponse(
-                id, title, content, hashtags, createdAt, email, nickname, userId, articleCommentResponse
-        );
+    public static ArticleWithCommentsResponse of(Long id, String title, String content, Set<String> hashtags, LocalDateTime createdAt, String email, String nickname, String userId, Set<ArticleCommentResponse> articleCommentResponse) {
+        return new ArticleWithCommentsResponse(id, title, content, hashtags, createdAt, email, nickname, userId, articleCommentResponse);
     }
 
     public static ArticleWithCommentsResponse from(ArticleWithCommentsDto dto) {
@@ -48,6 +46,7 @@ public record ArticleWithCommentsResponse(
                 nickname,
                 dto.userAccountDto().userId(),
                 new LinkedHashSet<>(organizeChildComments(dto.articleCommentDtos()))
+//                organizeChildComments(dto.articleCommentDtos())
         );
     }
 
@@ -66,8 +65,7 @@ public record ArticleWithCommentsResponse(
         return map.values().stream()
                 .filter(comment -> !comment.hasParentComment())
                 .collect(Collectors.toCollection(() ->
-                        new TreeSet<>(Comparator
-                                .comparing(ArticleCommentResponse::createdAt)
+                        new TreeSet<>(comparing(ArticleCommentResponse::createdAt)
                                 .reversed()
                                 .thenComparingLong(ArticleCommentResponse::id)
                         )

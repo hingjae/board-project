@@ -1,4 +1,4 @@
-package com.example.boardproject.domain;
+package com.example.boardproject.domain.baseentity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class AuditingFields {
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) // 웹 화면으로 보여질 때 파싱이 되는 방법
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @CreatedDate
     @Column(nullable = false, updatable = false)
     protected LocalDateTime createdAt;
@@ -29,7 +29,7 @@ public abstract class AuditingFields {
     @Column(nullable = false, length = 100, updatable = false)
     protected String createdBy;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) // 웹 화면으로 보여질 때 파싱이 되는 방법
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @LastModifiedDate
     @Column(nullable = false)
     protected LocalDateTime modifiedAt;

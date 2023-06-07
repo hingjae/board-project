@@ -1,55 +1,57 @@
 package com.example.boardproject.domain;
 
+import com.example.boardproject.domain.baseentity.AuditingFields;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Objects;
 
 @Getter
-@ToString(callSuper = true) // 부모 클래스인 오디팅 클래스의 필드도 ToString에 포함.
+@ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "email", unique = true),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy")
-})
+}
+)
 @Entity
-public class UserAccount extends AuditingFields{
-
+public class UserAccount extends AuditingFields {
     @Id
-    @Column(length = 50) private String userId;
-
-    @Column(nullable = false) private String userPassword;
-    @Column(length = 100) private String email;
-    @Column(length = 100) private String nickname;
-    private String memo;
+    @Column(length = 50)
+    private String userId;
+    @Setter
+    @Column(nullable = false)private String userPassword;
+    @Setter @Column(length = 100)private String email;
+    @Setter @Column(length = 100)private String nickname;
+    @Setter private String memo;
 
     protected UserAccount() {}
 
-    public static UserAccount of(String userId, String password, String email, String nickname, String memo) {
-        return new UserAccount(userId, password, email, nickname, memo, null);
-    }
-
-    public static UserAccount of(String userId, String password, String email, String nickname, String memo, String createdBy) {
-        return new UserAccount(userId, password, email, nickname, memo, createdBy);
-    }
-
-    private UserAccount(String userId, String password, String email, String nickname, String memo, String createdBy) {
+    private UserAccount(String userId, String userPassword, String email, String nickname, String memo, String createdBy) {
         this.userId = userId;
-        this.userPassword = password;
+        this.userPassword = userPassword;
         this.email = email;
         this.nickname = nickname;
         this.memo = memo;
         this.createdBy = createdBy;
-        this.modifiedBy = createdBy;
+        this.modifiedBy = createdBy; // 생성 시점 생성자와 수정자는 같다.
+    }
+
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo, String createdBy) {
+        return new UserAccount(userId, userPassword, email, nickname, memo, createdBy);
+    }
+
+    public static UserAccount of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccount(userId, userPassword, email, nickname, memo, null);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAccount that = (UserAccount) o;
-        return Objects.equals(getUserId(), that.getUserId());
+        if (!(o instanceof UserAccount that)) return false;
+        return getUserId() != null && getUserId().equals(that.getUserId());
     }
 
     @Override

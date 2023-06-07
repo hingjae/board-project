@@ -1,5 +1,6 @@
 package com.example.boardproject.domain;
 
+import com.example.boardproject.domain.baseentity.AuditingFields;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,42 +8,43 @@ import lombok.ToString;
 
 import java.util.*;
 
-
 @Getter
 @ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
-}) // 검색을 위해 인덱스 작업을 해줌. 본문검색은 용량이 너무 커서 지원하지 않음.
+})
 @Entity
-public class Article extends AuditingFields{
-
+public class Article extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount;
+    @Setter
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private UserAccount userAccount;
 
     @Setter @Column(nullable = false) private String title;
     @Setter @Column(nullable = false, length = 10000) private String content;
 
+    //게시글을 작성할 때 해시태그가 생성되기 때문에 주인 테이블을 article로 정함.
     @ToString.Exclude
-    @JoinTable( // 연관관계의 주인임을 Article에 명시해줌.
+    @JoinTable(
             name = "article_hashtag",
             joinColumns = @JoinColumn(name = "articleId"),
             inverseJoinColumns = @JoinColumn(name = "hashtagId")
     )
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //article 생성을 통해 hashtag를 조작하기 때문에 다대다 관계이기 때문에 삭제 룰은 포함하지 않아야함.
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
-    @ToString.Exclude
+    @ToString.Exclude //순환참조 방지
     @OrderBy("createdAt DESC")
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL) // articleRepository에서 쿼리를 날릴 때 articleComment 테이블도 접근함.
+    private Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-    protected Article() {
-    }
+    protected Article() {}
 
     private Article(UserAccount userAccount, String title, String content) {
         this.userAccount = userAccount;
@@ -69,11 +71,9 @@ public class Article extends AuditingFields{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Article article = (Article) o;
-        return getId() != null && getId().equals(article.getId());
+        if (!(o instanceof Article article)) return false;
+        return getId().equals(article.getId());
     }
-    //식별자가 부여되지 않으면 false, 객체 전체가 아닌 식별자를 보고 동등성 검사를 진행. (효율성 증가)
 
     @Override
     public int hashCode() {

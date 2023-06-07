@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <thlogic>
-    <attr sel="#header" th:replace="header :: header"/>
-    <attr sel="#footer" th:replace="footer :: footer"/>
+    <attr sel="#header" th:replace="header :: header" />
+    <attr sel="#footer" th:replace="footer :: footer" />
 
     <attr sel="main" th:object="${articles}">
         <attr sel="#hashtags" th:remove="all-but-first">
@@ -11,7 +11,7 @@
             sort=${param.sort},
             searchType=${searchType.name},
             searchValue=${hashtag}
-        )}"/>
+        )}" />
             </attr>
         </attr>
 
@@ -44,11 +44,10 @@
             </attr>
             <attr sel="tbody" th:remove="all-but-first">
                 <attr sel="tr[0]" th:each="article : ${articles}">
-                    <attr sel="td.title/a" th:text="${article.title}" th:href="@{'/articles/' + ${article.id}}"/>
-                    <attr sel="td.content/span" th:text="${article.content}"/>
-                    <attr sel="td.user-id" th:text="${article.nickname}"/>
-                    <attr sel="td.created-at/time" th:datetime="${article.createdAt}"
-                          th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}"/>
+                    <attr sel="td.title/a" th:text="${article.title}" th:href="@{'/articles/' + ${article.id}}" />
+                    <attr sel="td.content/span" th:text="${article.content}" />
+                    <attr sel="td.user-id" th:text="${article.nickname}" />
+                    <attr sel="td.created-at/time" th:datetime="${article.createdAt}" th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd')}" />
                 </attr>
             </attr>
         </attr>

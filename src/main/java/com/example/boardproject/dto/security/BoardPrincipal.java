@@ -34,7 +34,7 @@ public record BoardPrincipal(
                 roleTypes.stream()
                         .map(RoleType::getName)
                         .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toUnmodifiableSet()), // 권한
+                        .collect(Collectors.toUnmodifiableSet()),
                 email,
                 nickname,
                 memo,
@@ -71,11 +71,8 @@ public record BoardPrincipal(
     @Override public boolean isCredentialsNonExpired() {return true;}
     @Override public boolean isEnabled() {return true;}
 
-    @Override
-    public Map<String, Object> getAttributes() { return oAuth2Attributes; } // 인증정보를 받았을 때 인증정보의 전체 내용이 이 곳에 있어야함.
-
-    @Override
-    public String getName() {return username; }
+    @Override public Map<String, Object> getAttributes() { return oAuth2Attributes; } // 인증정보를 받았을 때 인증정보의 전체 내용이 이 곳에 있어야함.
+    @Override public String getName() {return username; }
 
     public enum RoleType {
         USER("ROLE_USER");
