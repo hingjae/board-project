@@ -20,7 +20,7 @@ class KakaoOAuth2ResponseTest {
     @DisplayName("인증 결과를 Map(deserialized json)으로 받으면, 카카오 인증 응답 객체로 변환한다.")
     @Test
     void givenMapFromJson_whenInstantiating_thenReturnsKakaoResponseObject() throws Exception {
-        // Given
+        // Given """는 jdk14부터 지원.
         String serializedResponse = """
                 {
                     "id": 1234567890,

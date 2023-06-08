@@ -24,23 +24,22 @@ import static org.mockito.BDDMockito.*;
 
 @DisplayName("비즈니스 로직 - 해시태그")
 @ExtendWith(MockitoExtension.class)
-public class HashtagServiceTest {
+class HashtagServiceTest {
 
-    @InjectMocks
-    private HashtagService sut;
-    @Mock
-    private HashtagRepository hashtagRepository;
+    @InjectMocks HashtagService sut;
+
+    @Mock HashtagRepository hashtagRepository;
 
     @DisplayName("본문을 파싱하면, 해시태그 이름들을 중복 없이 반환한다.")
     @MethodSource
     @ParameterizedTest(name = "[{index}] \"{0}\" => {1}")
     void givenContent_whenParsing_thenReturnsUniqueHashtagNames(String input, Set<String> expected) {
-        // Given
+        //Given
 
-        // When
-        Set<String> actual = sut.parseHashtagNames(input);
+        //when
+        Set<String> actual =  sut.parseHashtagNames(input);
 
-        // Then
+        //then
         assertThat(actual).containsExactlyInAnyOrderElementsOf(expected);
         then(hashtagRepository).shouldHaveNoInteractions();
     }

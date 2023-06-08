@@ -83,6 +83,7 @@ class UserAccountServiceTest {
         then(userAccountRepository).should().save(userAccount);
     }
 
+
     private UserAccount createUserAccount(String username) {
         return createUserAccount(username, null);
     }
@@ -101,4 +102,5 @@ class UserAccountServiceTest {
                 createdBy
         );
     }
+
 }

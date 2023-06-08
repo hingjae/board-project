@@ -26,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
+
 @DisplayName("비즈니스 로직 - 댓글")
 @ExtendWith(MockitoExtension.class)
 class ArticleCommentServiceTest {
@@ -36,7 +37,6 @@ class ArticleCommentServiceTest {
     @Mock private ArticleCommentRepository articleCommentRepository;
     @Mock private UserAccountRepository userAccountRepository;
 
-    /*
     @DisplayName("게시글 ID로 조회하면, 해당하는 댓글 리스트를 반환한다.")
     @Test
     void givenArticleId_whenSearchingArticleComments_thenReturnsArticleComments() {
@@ -62,29 +62,6 @@ class ArticleCommentServiceTest {
                         tuple(2L, 1L, 1L, "child content")
                 );
         then(articleCommentRepository).should().findByArticle_Id(articleId);
-    }
-     */
-
-    @DisplayName("부모 댓글 ID와 댓글 정보를 입력하면, 대댓글을 저장한다.")
-    @Test
-    void givenParentCommentIdAndArticleCommentInfo_whenSaving_thenSavesChildComment() {
-        // Given
-        Long parentCommentId = 1L;
-        ArticleComment parent = createArticleComment(parentCommentId, "댓글");
-        ArticleCommentDto child = createArticleCommentDto(parentCommentId, "대댓글");
-        given(articleRepository.getReferenceById(child.articleId())).willReturn(createArticle());
-        given(userAccountRepository.getReferenceById(child.userAccountDto().userId())).willReturn(createUserAccount());
-        given(articleCommentRepository.getReferenceById(child.parentCommentId())).willReturn(parent);
-
-        // When
-        sut.saveArticleComment(child);
-
-        // Then
-        assertThat(child.parentCommentId()).isNotNull();
-        then(articleRepository).should().getReferenceById(child.articleId());
-        then(userAccountRepository).should().getReferenceById(child.userAccountDto().userId());
-        then(articleCommentRepository).should().getReferenceById(child.parentCommentId());
-        then(articleCommentRepository).should(never()).save(any(ArticleComment.class));
     }
 
     @DisplayName("댓글 정보를 입력하면, 댓글을 저장한다.")
@@ -120,6 +97,28 @@ class ArticleCommentServiceTest {
         then(articleRepository).should().getReferenceById(dto.articleId());
         then(userAccountRepository).shouldHaveNoInteractions();
         then(articleCommentRepository).shouldHaveNoInteractions();
+    }
+
+    @DisplayName("부모 댓글 ID와 댓글 정보를 입력하면, 대댓글을 저장한다.")
+    @Test
+    void givenParentCommentIdAndArticleCommentInfo_whenSaving_thenSavesChildComment() {
+        // Given
+        Long parentCommentId = 1L;
+        ArticleComment parent = createArticleComment(parentCommentId, "댓글");
+        ArticleCommentDto child = createArticleCommentDto(parentCommentId, "대댓글");
+        given(articleRepository.getReferenceById(child.articleId())).willReturn(createArticle());
+        given(userAccountRepository.getReferenceById(child.userAccountDto().userId())).willReturn(createUserAccount());
+        given(articleCommentRepository.getReferenceById(child.parentCommentId())).willReturn(parent);
+
+        // When
+        sut.saveArticleComment(child);
+
+        // Then
+        assertThat(child.parentCommentId()).isNotNull();
+        then(articleRepository).should().getReferenceById(child.articleId());
+        then(userAccountRepository).should().getReferenceById(child.userAccountDto().userId());
+        then(articleCommentRepository).should().getReferenceById(child.parentCommentId());
+        then(articleCommentRepository).should(never()).save(any(ArticleComment.class));
     }
 
     @DisplayName("댓글 ID를 입력하면, 댓글을 삭제한다.")
