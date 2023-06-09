@@ -45,8 +45,8 @@ public record ArticleWithCommentsResponse(
                 dto.userAccountDto().email(),
                 nickname,
                 dto.userAccountDto().userId(),
-                new LinkedHashSet<>(organizeChildComments(dto.articleCommentDtos()))
-//                organizeChildComments(dto.articleCommentDtos())
+                organizeChildComments(dto.articleCommentDtos())
+//                new LinkedHashSet<>(organizeChildComments(dto.articleCommentDtos()))
         );
     }
 

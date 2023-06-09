@@ -1,11 +1,11 @@
 package com.example.boardproject.domain;
 
 import com.example.boardproject.domain.baseentity.AuditingFields;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;

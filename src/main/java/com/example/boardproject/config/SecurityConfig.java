@@ -32,7 +32,8 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers(
+                        .mvcMatchers("/api/**").permitAll()
+                        .mvcMatchers(
                                 HttpMethod.GET,
                                 "/",
                                 "/articles",
