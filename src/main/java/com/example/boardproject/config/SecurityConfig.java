@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 .userService(oAuth2UserService)
                         )
                 )
+                .csrf(csrf -> csrf.ignoringAntMatchers("/api/**"))
                 .build();
     }
 

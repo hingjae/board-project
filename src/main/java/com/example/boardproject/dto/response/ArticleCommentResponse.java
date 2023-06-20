@@ -43,7 +43,7 @@ public record ArticleCommentResponse(
         return ArticleCommentResponse.of(
                 dto.id(),
                 dto.content(),
-                dto.createdAt(),
+                 dto.createdAt(),
                 dto.userAccountDto().email(),
                 nickname,
                 dto.userAccountDto().userId(),
