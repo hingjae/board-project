@@ -48,7 +48,11 @@ public class SecurityConfig {
                                 .userService(oAuth2UserService)
                         )
                 )
+<<<<<<< HEAD
                 .csrf(csrf -> csrf.ignoringAntMatchers("/api/**")) // api 호출할 때 인증이 필요 없음.
+=======
+                .csrf(csrf -> csrf.ignoringAntMatchers("/api/**"))
+>>>>>>> 7993da55b7aab02e26b930795d84b5d1446e5aa1
                 .build();
     }
 
