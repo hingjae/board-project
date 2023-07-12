@@ -11,7 +11,6 @@ import com.example.boardproject.dto.UserAccountDto;
 import com.example.boardproject.repository.ArticleRepository;
 import com.example.boardproject.repository.HashtagRepository;
 import com.example.boardproject.repository.UserAccountRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +23,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
